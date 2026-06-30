@@ -3,40 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Çata Jîrkiya Sintentîk (Êzîdî)</title>
-    <!-- ربط ملف التصميم الخارجي -->
+    <title>Kîborda Êzîdî ya Mobîl</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="chat-container">
-    <!-- رأس الشات -->
-    <div class="chat-header">
-        Jiwarê Êzîdî AI
-        <span>Bi xêr hatî, ez tenê bi zimanê êzîdî bersiv didim</span>
+<div class="phone-container">
+    <!-- شاشة الهاتف الافتراضية لعرض ما تكتبه -->
+    <div class="screen-area">
+        <textarea id="keyboardInput" placeholder="Li vir binivîse..." readonly></textarea>
     </div>
 
-    <!-- منطقة عرض الرسائل -->
-    <div class="chat-messages" id="chatMessages">
-        <div class="message bot-message">
-            Roj baş! Ez Alîkarê te yê Jîrkiya Sintentîk im. Ez dikarim ji bo te çi bikim?
+    <!-- لوحة مفاتيح الهاتف المستقلة -->
+    <div class="mobile-keyboard" id="ezidiKeyboard">
+        
+        <!-- 1. شاشة الحروف والأزرار الرئيسية -->
+        <div class="keyboard-view active" id="view-letters">
+            <!-- السطر الأول -->
+            <div class="keyboard-row">
+                <button class="key" onclick="pressKey('q')">q</button>
+                <button class="key" onclick="pressKey('w')">w</button>
+                <button class="key" onclick="pressKey('e')">e</button>
+                <button class="key" onclick="pressKey('ê')">ê</button>
+                <button class="key" onclick="pressKey('r')">r</button>
+                <button class="key" onclick="pressKey('t')">t</button>
+                <button class="key" onclick="pressKey('y')">y</button>
+                <button class="key" onclick="pressKey('u')">u</button>
+                <button class="key" onclick="pressKey('û')">û</button>
+                <button class="key" onclick="pressKey('i')">i</button>
+                <button class="key" onclick="pressKey('î')">î</button>
+                <button class="key" onclick="pressKey('o')">o</button>
+                <button class="key" onclick="pressKey('p')">p</button>
+            </div>
+            <!-- السطر الثاني -->
+            <div class="keyboard-row">
+                <button class="key" onclick="pressKey('a')">a</button>
+                <button class="key" onclick="pressKey('s')">s</button>
+                <button class="key" onclick="pressKey('ş')">ş</button>
+                <button class="key" onclick="pressKey('d')">d</button>
+                <button class="key" onclick="pressKey('f')">f</button>
+                <button class="key" onclick="pressKey('g')">g</button>
+                <button class="key" onclick="pressKey('h')">h</button>
+                <button class="key" onclick="pressKey('j')">j</button>
+                <button class="key" onclick="pressKey('k')">k</button>
+                <button class="key" onclick="pressKey('l')">l</button>
+            </div>
+            <!-- السطر الثالث -->
+            <div class="keyboard-row">
+                <button class="key action-key" onclick="toggleShift()">⇧</button>
+                <button class="key" onclick="pressKey('z')">z</button>
+                <button class="key" onclick="pressKey('x')">x</button>
+                <button class="key" onclick="pressKey('c')">c</button>
+                <button class="key" onclick="pressKey('ç')">ç</button>
+                <button class="key" onclick="pressKey('v')">v</button>
+                <button class="key" onclick="pressKey('b')">b</button>
+                <button class="key" onclick="pressKey('n')">n</button>
+                <button class="key" onclick="pressKey('m')">m</button>
+                <button class="key action-key" onclick="pressBackspace()">⌫</button>
+            </div>
         </div>
-    </div>
 
-    <!-- لوحة المفاتيح الإيزيدية الافتراضية -->
-    <div class="keyboard-container" id="ezidiKeyboard">
-        <!-- سيتم توليد أزرار الحروف هنا عبر JavaScript -->
-    </div>
+        <!-- 2. شاشة الأرقام والرموز -->
+        <div class="keyboard-view" id="view-symbols">
+            <div class="keyboard-row">
+                <button class="key" onclick="pressKey('1')">1</button>
+                <button class="key" onclick="pressKey('2')">2</button>
+                <button class="key" onclick="pressKey('3')">3</button>
+                <button class="key" onclick="pressKey('4')">4</button>
+                <button class="key" onclick="pressKey('5')">5</button>
+                <button class="key" onclick="pressKey('6')">6</button>
+                <button class="key" onclick="pressKey('7')">7</button>
+                <button class="key" onclick="pressKey('8')">8</button>
+                <button class="key" onclick="pressKey('9')">9</button>
+                <button class="key" onclick="pressKey('0')">0</button>
+            </div>
+            <div class="keyboard-row">
+                <button class="key" onclick="pressKey('-')">-</button>
+                <button class="key" onclick="pressKey('/')">/</button>
+                <button class="key" onclick="pressKey(':')">:</button>
+                <button class="key" onclick="pressKey(';')">;</button>
+                <button class="key" onclick="pressKey('(')">(</button>
+                <button class="key" onclick="pressKey(')')">)</button>
+                <button class="key" onclick="pressKey('$')">$</button>
+                <button class="key" onclick="pressKey('&')">&</button>
+                <button class="key" onclick="pressKey('@')">@</button>
+            </div>
+            <div class="keyboard-row">
+                <button class="key" onclick="pressKey('.')">.</button>
+                <button class="key" onclick="pressKey(',')">,</button>
+                <button class="key" onclick="pressKey('?')">?</button>
+                <button class="key" onclick="pressKey('!')">!</button>
+                <button class="key" onclick="pressKey('\'')">'</button>
+                <button class="key action-key" style="grid-column: span 3;" onclick="pressBackspace()">⌫</button>
+            </div>
+        </div>
 
-    <!-- صندوق الكتابة وإدخل النص -->
-    <div class="chat-input-area">
-        <input type="text" id="userInput" placeholder="Tiştek binivîse..." onkeypress="handleKeyPress(event)">
-        <button onclick="sendMessage()">Şandin</button>
+        <!-- 3. شاشة الملصقات (Stickers) والإيموجي وعلم إيزيدخان -->
+        <div class="keyboard-view" id="view-stickers">
+            <div class="stickers-grid">
+                <!-- علم إيزيدخان مصمم كملصق صغير عبر CSS -->
+                <div class="sticker-btn" onclick="pressSticker('ezidkhan')">
+                    <div class="ezidkhan-flag-mini"></div>
+                </div>
+                <!-- ملصقات وإيموجي إضافية -->
+                <button class="sticker-btn" onclick="pressKey('☀️')">☀️</button>
+                <button class="sticker-btn" onclick="pressKey('❤️')">❤️</button>
+                <button class="sticker-btn" onclick="pressKey('🦚')">🦚</button>
+                <button class="sticker-btn" onclick="pressKey('🤝')">🤝</button>
+                <button class="sticker-btn" onclick="pressKey('🌹')">🌹</button>
+                <button class="sticker-btn" onclick="pressKey('✨')">✨</button>
+                <button class="sticker-btn" onclick="pressKey('🕊️')">🕊️</button>
+                <button class="sticker-btn" onclick="pressKey('haa')">😂</button>
+                <button class="sticker-btn" onclick="pressKey('Ok')">👍</button>
+            </div>
+        </div>
+
+        <!-- السطر السفلي الثابت (التحكم) -->
+        <div class="keyboard-row bottom-row">
+            <button class="key action-key" id="toggle-sym-btn" onclick="switchView('symbols')">?123</button>
+            <button class="key action-key" onclick="switchView('stickers')">😊</button>
+            <button class="key space-key" onclick="pressKey(' ')">Spasî</button>
+            <button class="key action-key" id="toggle-let-btn" onclick="switchView('letters')">ABC</button>
+            <button class="key action-key enter-key" onclick="pressKey('\n')">Enter</button>
+        </div>
     </div>
 </div>
 
-<!-- ربط ملف البرمجة الخارجي -->
 <script src="script.js"></script>
 </body>
 </html>
-
