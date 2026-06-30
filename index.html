@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çata Jîrkiya Sintentîk (Êzîdî)</title>
+    <!-- ربط ملف التصميم الخارجي -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="chat-container">
+    <!-- رأس الشات -->
+    <div class="chat-header">
+        Jiwarê Êzîdî AI
+        <span>Bi xêr hatî, ez tenê bi zimanê êzîdî bersiv didim</span>
+    </div>
+
+    <!-- منطقة عرض الرسائل -->
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+            Roj baş! Ez Alîkarê te yê Jîrkiya Sintentîk im. Ez dikarim ji bo te çi bikim?
+        </div>
+    </div>
+
+    <!-- لوحة المفاتيح الإيزيدية الافتراضية -->
+    <div class="keyboard-container" id="ezidiKeyboard">
+        <!-- سيتم توليد أزرار الحروف هنا عبر JavaScript -->
+    </div>
+
+    <!-- صندوق الكتابة وإدخل النص -->
+    <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Tiştek binivîse..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Şandin</button>
+    </div>
+</div>
+
+<!-- ربط ملف البرمجة الخارجي -->
+<script src="script.js"></script>
+</body>
+</html>
 
